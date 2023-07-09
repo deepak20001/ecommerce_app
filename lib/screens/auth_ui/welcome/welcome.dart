@@ -1,9 +1,11 @@
+import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
+import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/asset_images.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Welcome extends StatelessWidget {
+  const Welcome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +15,8 @@ class Login extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: kToolbarHeight + 12,
-            ),
-            const Text(
-              "Welcome",
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            const Text(
-              "Buy any item from here ",
-              style: TextStyle(
-                fontSize: 18.0,
-              ),
-            ),
+            const TopTitles(
+                title: "Welcome", subtitle: "Buy any item using APP"),
             Center(
               child: Image.asset(AssetsImages.instance.welcomeImage),
             ),
@@ -58,6 +43,20 @@ class Login extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 30.0,
+            ),
+            PrimaryButton(
+              onPressed: () {},
+              title: "Login",
+            ),
+            const SizedBox(
+              height: 18.0,
+            ),
+            PrimaryButton(
+              onPressed: () {},
+              title: "Sign Up",
             ),
           ],
         ),

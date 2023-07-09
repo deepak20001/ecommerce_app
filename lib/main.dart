@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/constants/theme.dart';
 import 'package:flutter/material.dart';
-import 'screens/auth_ui/login/login.dart';
+import 'screens/auth_ui/welcome/welcome.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "E Commerce",
       theme: themeData,
-      home: const Login(),
+      home: const Welcome(),
     );
   }
 }
