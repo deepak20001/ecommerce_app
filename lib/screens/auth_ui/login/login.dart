@@ -10,8 +10,8 @@ class Login extends StatelessWidget {
       body: Column(
         children: [
           TopTitles(
-            title: "Welcome back to Ecommerce App",
-            subtitle: "Login",
+            title: "Login",
+            subtitle: "Welcome back to Ecommerce App",
           ),
         ],
       ),
