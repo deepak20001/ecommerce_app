@@ -3,6 +3,8 @@ import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/asset_images.dart';
+import '../../../constants/routes.dart';
+import '../login/login.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -48,7 +50,9 @@ class Welcome extends StatelessWidget {
               height: 30.0,
             ),
             PrimaryButton(
-              onPressed: () {},
+              onPressed: () {
+                Routes.instance.push(widget: const Login(), context: context);
+              },
               title: "Login",
             ),
             const SizedBox(
