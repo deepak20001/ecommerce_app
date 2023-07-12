@@ -1,7 +1,10 @@
+import 'package:ecommerce_app/screens/home/home.dart';
 import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../constants/routes.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -94,7 +97,10 @@ class _SignUpState extends State<SignUp> {
               ),
               PrimaryButton(
                 title: "Create an account",
-                onPressed: () {},
+                onPressed: () {
+                  Routes.instance.pushAndRemoveUntil(
+                      widget: const Home(), context: context);
+                },
               ),
               const SizedBox(
                 height: 24.0,
@@ -107,13 +113,15 @@ class _SignUpState extends State<SignUp> {
               ),
               Center(
                 child: CupertinoButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                   child: Text(
                     "Login",
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
-                  onPressed: () {},
                 ),
               ),
             ],
