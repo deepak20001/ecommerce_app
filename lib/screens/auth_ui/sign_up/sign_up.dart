@@ -3,17 +3,14 @@ import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants/routes.dart';
-import '../sign_up/sign_up.dart';
-
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   bool isShowPassword = true;
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,7 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TopTitles(
-                title: "Login",
+                title: "Create Account",
                 subtitle: "Welcome Back To Ecommerce App",
               ),
               const SizedBox(
@@ -33,9 +30,33 @@ class _LoginState extends State<Login> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
+                  hintText: "Name",
+                  prefixIcon: Icon(
+                    Icons.person_2_outlined,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 12.0,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
                   hintText: "E-mail",
                   prefixIcon: Icon(
                     Icons.email_outlined,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 12.0,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  hintText: "Phone",
+                  prefixIcon: Icon(
+                    Icons.phone_outlined,
                   ),
                 ),
               ),
@@ -72,14 +93,14 @@ class _LoginState extends State<Login> {
                 height: 36.0,
               ),
               PrimaryButton(
-                title: "Login",
+                title: "Create an account",
                 onPressed: () {},
               ),
               const SizedBox(
                 height: 24.0,
               ),
               const Center(
-                child: Text("Don't have an account"),
+                child: Text("I already have an account"),
               ),
               const SizedBox(
                 height: 12.0,
@@ -87,15 +108,12 @@ class _LoginState extends State<Login> {
               Center(
                 child: CupertinoButton(
                   child: Text(
-                    "Create an account",
+                    "Login",
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
-                  onPressed: () {
-                    Routes.instance
-                        .push(widget: const SignUp(), context: context);
-                  },
+                  onPressed: () {},
                 ),
               ),
             ],
