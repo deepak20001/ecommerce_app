@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../constants/asset_images.dart';
 import '../../../constants/routes.dart';
 import '../login/login.dart';
+import '../sign_up/sign_up.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -59,7 +60,9 @@ class Welcome extends StatelessWidget {
               height: 18.0,
             ),
             PrimaryButton(
-              onPressed: () {},
+              onPressed: () {
+                Routes.instance.push(widget: const SignUp(), context: context);
+              },
               title: "Sign Up",
             ),
           ],
