@@ -33,6 +33,15 @@ ThemeData themeData = ThemeData(
       disabledBackgroundColor: Colors.grey,
     ),
   ),
+  canvasColor: const Color(0xFFAA27FB),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.white,
+    elevation: 0.0,
+    iconTheme: IconThemeData(
+      color: Color(0xFFAA27FB),
+    ),
+  ),
+  primarySwatch: customColor,
 );
 
 OutlineInputBorder outlineInputBorder = const OutlineInputBorder(
@@ -40,3 +49,17 @@ OutlineInputBorder outlineInputBorder = const OutlineInputBorder(
     color: Colors.grey,
   ),
 );
+
+// Define your custom MaterialColor
+MaterialColor customColor = const MaterialColor(0xFFAA27FB, {
+  50: Color(0xFFE5CBFB),
+  100: Color(0xFFD095FB),
+  200: Color(0xFFC25FFA),
+  300: Color(0xFFB22BFA),
+  400: Color(0xFFAA27FB), // This is the primary color
+  500: Color(0xFF9B04F8),
+  600: Color(0xFF8903D2),
+  700: Color(0xFF7503AD),
+  800: Color(0xFF620388),
+  900: Color(0xFF4E0263),
+});

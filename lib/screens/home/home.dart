@@ -1,6 +1,8 @@
 import 'package:ecommerce_app/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
+import 'package:ecommerce_app/screens/product_details/product_details.dart';
 import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/material.dart';
+import '../../constants/routes.dart';
 import '../../models/category_model/category_model.dart';
 import '../../models/product_model/product_model.dart';
 
@@ -183,7 +185,12 @@ class _HomeState extends State<Home> {
                                       height: 45.0,
                                       width: 140.0,
                                       child: OutlinedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Routes.instance.push(
+                                              widget: ProductDetails(
+                                                  singleProduct: singleProduct),
+                                              context: context);
+                                        },
                                         child: const Text(
                                           "Buy",
                                         ),
