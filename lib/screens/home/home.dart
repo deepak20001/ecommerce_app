@@ -1,161 +1,189 @@
+import 'package:ecommerce_app/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/material.dart';
+import '../../models/category_model/category_model.dart';
 import '../../models/product_model/product_model.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  List<CategoryModel> categoriesList = [];
+
+  bool isLoading = false;
+  @override
+  void initState() {
+    getCategoryList();
+    super.initState();
+  }
+
+  void getCategoryList() async {
+    setState(() {
+      isLoading = true;
+    });
+    categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
+      body: isLoading
+          ? Center(
+              child: Container(
+                height: 100,
+                width: 100,
+                alignment: Alignment.center,
+                child: const CircularProgressIndicator(),
+              ),
+            )
+          : SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TopTitles(title: "E Commerce", subtitle: ""),
-                    TextFormField(
-                      decoration: const InputDecoration(hintText: "Search...."),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const TopTitles(title: "E Commerce", subtitle: ""),
+                          TextFormField(
+                            decoration:
+                                const InputDecoration(hintText: "Search...."),
+                          ),
+                          const SizedBox(
+                            height: 24.0,
+                          ),
+                          const Text(
+                            "Categories",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      child: Row(
+                        children: categoriesList
+                            .map(
+                              (e) => Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Card(
+                                  color: Colors.white,
+                                  elevation: 2.5,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: Image.network(e.image),
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
                     ),
                     const SizedBox(
-                      height: 24.0,
+                      height: 12.0,
                     ),
-                    const Text(
-                      "Categories",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+                    const Padding(
+                      padding: EdgeInsets.only(
+                        top: 12.0,
+                        left: 12.0,
+                      ),
+                      child: Text(
+                        "Best Products",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12.0,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          // primary: false,
+                          itemCount: bestProducts.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing: 20,
+                            childAspectRatio: 0.9,
+                            crossAxisCount: 2,
+                          ),
+                          itemBuilder: (ctx, index) {
+                            ProductModel singleProduct = bestProducts[index];
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 228, 209, 240),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 12.0,
+                                  ),
+                                  Image.network(
+                                    singleProduct.image,
+                                    height: 80.0,
+                                    width: 100.0,
+                                  ),
+                                  Text(
+                                    singleProduct.name,
+                                    style: const TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text("Price: \$${singleProduct.price}"),
+                                  const SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  SizedBox(
+                                    height: 45.0,
+                                    width: 140.0,
+                                    child: OutlinedButton(
+                                      onPressed: () {},
+                                      child: const Text(
+                                        "Buy",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                child: Row(
-                  children: categoriesList
-                      .map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Card(
-                            color: Colors.white,
-                            elevation: 2.5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            child: SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: Image.network(e),
-                            ),
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(
-                  top: 12.0,
-                  left: 12.0,
-                ),
-                child: Text(
-                  "Best Products",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: GridView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    // primary: false,
-                    itemCount: bestProducts.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 20,
-                      childAspectRatio: 0.9,
-                      crossAxisCount: 2,
-                    ),
-                    itemBuilder: (ctx, index) {
-                      ProductModel singleProduct = bestProducts[index];
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 228, 209, 240),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 12.0,
-                            ),
-                            Image.network(
-                              singleProduct.image,
-                              height: 80.0,
-                              width: 100.0,
-                            ),
-                            Text(
-                              singleProduct.name,
-                              style: const TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text("Price: \$${singleProduct.price}"),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            SizedBox(
-                              height: 45.0,
-                              width: 140.0,
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  "Buy",
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
-
-List<String> categoriesList = [
-  "https://img.freepik.com/free-photo/dish-with-rice_144627-18096.jpg?w=900&t=st=1689247703~exp=1689248303~hmac=909248876b084056ae3b8b63e4da83d937b1b812a2a99ea3f2ac74ace239632c",
-  "https://img.freepik.com/premium-photo/indian-lunch-dinner-main-course-food-group-includes-paneer-butter-masala-dal-makhani-palak-paneer-roti-rice-etc-selective-focus_466689-6854.jpg?size=626&ext=jpg",
-  "https://img.freepik.com/premium-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-8576.jpg?size=626&ext=jpg",
-  "https://img.freepik.com/free-photo/chicken-skewers-with-slices-sweet-peppers-dill_2829-18809.jpg?size=626&ext=jpg",
-  "https://img.freepik.com/premium-photo/schezwan-noodles-vegetable-hakka-noodles-chow-mein-is-popular-indo-chinese-recipes-served-bowl-plate-with-wooden-chopsticks_466689-46487.jpg?size=626&ext=jpg",
-];
 
 List<ProductModel> bestProducts = [
   ProductModel(
