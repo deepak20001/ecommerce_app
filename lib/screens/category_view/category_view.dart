@@ -1,43 +1,43 @@
-import 'package:ecommerce_app/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
-import 'package:ecommerce_app/screens/category_view/category_view.dart';
-import 'package:ecommerce_app/screens/product_details/product_details.dart';
 import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../../constants/routes.dart';
+import '../../firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import '../../models/category_model/category_model.dart';
 import '../../models/product_model/product_model.dart';
+import '../product_details/product_details.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class CategoryView extends StatefulWidget {
+  final CategoryModel categoryModel;
+  const CategoryView({super.key, required this.categoryModel});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<CategoryView> createState() => _CategoryViewState();
 }
 
-class _HomeState extends State<Home> {
-  List<CategoryModel> categoriesList = [];
+class _CategoryViewState extends State<CategoryView> {
   List<ProductModel> productModelList = [];
 
   bool isLoading = false;
-  @override
-  void initState() {
-    getCategoryList();
-    super.initState();
-  }
 
   void getCategoryList() async {
     setState(() {
       isLoading = true;
     });
 
-    categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
-    productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
+    productModelList = await FirebaseFirestoreHelper.instance
+        .getCategoryViewProduct(widget.categoryModel.id);
     productModelList.shuffle();
 
     setState(() {
       isLoading = false;
     });
+  }
+
+  @override
+  void initState() {
+    getCategoryList();
+    super.initState();
   }
 
   @override
@@ -53,89 +53,26 @@ class _HomeState extends State<Home> {
               ),
             )
           : SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(
+                    height: kToolbarHeight * 1,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        const TopTitles(title: "E Commerce", subtitle: ""),
-                        TextFormField(
-                          decoration:
-                              const InputDecoration(hintText: "Search...."),
-                        ),
-                        const SizedBox(
-                          height: 24.0,
-                        ),
-                        const Text(
-                          "Categories",
-                          style: TextStyle(
+                        const BackButton(),
+                        Text(
+                          widget.categoryModel.name,
+                          style: const TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  categoriesList.isEmpty
-                      ? const Center(
-                          child: Text("Categories is empty."),
-                        )
-                      : SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          physics: const BouncingScrollPhysics(),
-                          child: Row(
-                            children: categoriesList
-                                .map(
-                                  (e) => Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: CupertinoButton(
-                                      onPressed: () {
-                                        Routes.instance.push(
-                                            widget:
-                                                CategoryView(categoryModel: e),
-                                            context: context);
-                                      },
-                                      child: Card(
-                                        color: Colors.white,
-                                        elevation: 2.5,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        child: SizedBox(
-                                          height: 100,
-                                          width: 100,
-                                          child: Image.network(e.image),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ),
-                  const SizedBox(
-                    height: 12.0,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(
-                      top: 12.0,
-                      left: 12.0,
-                    ),
-                    child: Text(
-                      "Best Products",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12.0,
                   ),
                   productModelList.isEmpty
                       ? const Center(
@@ -212,9 +149,6 @@ class _HomeState extends State<Home> {
                             },
                           ),
                         ),
-                  const SizedBox(
-                    height: 12.0,
-                  ),
                 ],
               ),
             ),
