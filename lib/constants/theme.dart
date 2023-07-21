@@ -37,6 +37,9 @@ ThemeData themeData = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.white,
     elevation: 0.0,
+    toolbarTextStyle: TextStyle(
+      color: Colors.black,
+    ),
     iconTheme: IconThemeData(
       color: Color(0xFFAA27FB),
     ),

@@ -66,6 +66,7 @@ class _CategoryViewState extends State<CategoryView> {
                         const BackButton(),
                         Text(
                           widget.categoryModel.name,
+                          textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,

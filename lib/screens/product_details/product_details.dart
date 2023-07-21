@@ -1,5 +1,7 @@
+import 'package:ecommerce_app/screens/cart_screen/cart_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../constants/routes.dart';
 import '../../models/product_model/product_model.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -19,7 +21,10 @@ class _ProductDetailsState extends State<ProductDetails> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Routes.instance
+                  .push(widget: const CartScreen(), context: context);
+            },
             icon: const Icon(Icons.shopping_cart),
           ),
         ],
@@ -37,11 +42,15 @@ class _ProductDetailsState extends State<ProductDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.singleProduct.name,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: Text(
+                    widget.singleProduct.name,
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 IconButton(
