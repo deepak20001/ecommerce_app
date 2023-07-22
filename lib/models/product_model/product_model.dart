@@ -14,6 +14,8 @@ class ProductModel {
   String status;
   bool isFavourite = false;
 
+  int? qty;
+
   ProductModel({
     required this.image,
     required this.id,
@@ -22,6 +24,7 @@ class ProductModel {
     required this.description,
     required this.status,
     required isFavourite,
+    this.qty,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -34,6 +37,7 @@ class ProductModel {
             "This is an awesome product and must to buy.",
         status: json["status"] ?? "pending",
         isFavourite: false,
+        qty: json["qty"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,5 +48,20 @@ class ProductModel {
         "description": description,
         "status": status,
         "isFavourite": isFavourite,
+        "qty": qty,
       };
+
+  ProductModel copyWith({
+    int? qty,
+  }) =>
+      ProductModel(
+        image: image,
+        id: id,
+        name: name,
+        price: price,
+        description: description,
+        status: status,
+        isFavourite: isFavourite,
+        qty: qty??this.qty,
+      );
 }

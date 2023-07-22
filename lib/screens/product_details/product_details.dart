@@ -34,120 +34,127 @@ class _ProductDetailsState extends State<ProductDetails> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(
-              widget.singleProduct.image,
-              height: 300,
-              width: 400,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Text(
-                    widget.singleProduct.name,
-                    maxLines: 1,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.network(
+                widget.singleProduct.image,
+                height: 300,
+                width: 400,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Text(
+                      widget.singleProduct.name,
+                      maxLines: 1,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      widget.singleProduct.isFavourite =
-                          !widget.singleProduct.isFavourite;
-                    });
-                  },
-                  icon: Icon(
-                    widget.singleProduct.isFavourite
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: const Color(0xFFAA27FB),
-                  ),
-                ),
-              ],
-            ),
-            Text(widget.singleProduct.description),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Row(
-              children: [
-                CupertinoButton(
-                  onPressed: () {
-                    if (qty >= 1) {
+                  IconButton(
+                    onPressed: () {
                       setState(() {
-                        qty--;
+                        widget.singleProduct.isFavourite =
+                            !widget.singleProduct.isFavourite;
                       });
-                    }
-                  },
-                  child: const Icon(
-                    Icons.remove_circle,
-                    size: 35.0,
+                    },
+                    icon: Icon(
+                      widget.singleProduct.isFavourite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: const Color(0xFFAA27FB),
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 12.0,
-                ),
-                Text(
-                  qty.toString(),
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 72, 0, 117),
+                ],
+              ),
+              Text(widget.singleProduct.description),
+              const SizedBox(
+                height: 12.0,
+              ),
+              Row(
+                children: [
+                  CupertinoButton(
+                    onPressed: () {
+                      if (qty >= 1) {
+                        setState(() {
+                          qty--;
+                        });
+                      }
+                    },
+                    child: const Icon(
+                      Icons.remove_circle,
+                      size: 35.0,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 12.0,
-                ),
-                CupertinoButton(
-                  onPressed: () {
-                    setState(() {
-                      qty++;
-                    });
-                  },
-                  child: const Icon(
-                    Icons.add_circle,
-                    size: 35.0,
+                  const SizedBox(
+                    width: 12.0,
                   ),
-                ),
-              ],
-            ),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                OutlinedButton(
-                  onPressed: () {
-                    AppProvider appProvider =
-                        Provider.of<AppProvider>(context, listen: false);
-                    appProvider.addCartProduct(widget.singleProduct);
-                    showMessage("Added to Cart");
-                  },
-                  child: const Text("ADD TO CART"),
-                ),
-                const SizedBox(
-                  width: 24.0,
-                ),
-                SizedBox(
-                  height: 38,
-                  width: 140,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("BUY"),
+                  Text(
+                    qty.toString(),
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 72, 0, 117),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 24.0,
-            ),
-          ],
+                  const SizedBox(
+                    width: 12.0,
+                  ),
+                  CupertinoButton(
+                    onPressed: () {
+                      setState(() {
+                        qty++;
+                      });
+                    },
+                    child: const Icon(
+                      Icons.add_circle,
+                      size: 35.0,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 24.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      AppProvider appProvider =
+                          Provider.of<AppProvider>(context, listen: false);
+                      ProductModel productModel =
+                          widget.singleProduct.copyWith(qty: qty);
+                      appProvider.addCartProduct(productModel);
+                      showMessage("Added to Cart");
+                    },
+                    child: const Text("ADD TO CART"),
+                  ),
+                  const SizedBox(
+                    width: 24.0,
+                  ),
+                  SizedBox(
+                    height: 38,
+                    width: 140,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("BUY"),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 24.0,
+              ),
+            ],
+          ),
         ),
       ),
     );
