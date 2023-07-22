@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../../models/product_model/product_model.dart';
 
 class SingleCartItem extends StatefulWidget {
-  const SingleCartItem({super.key});
+  final ProductModel singleProduct;
+  const SingleCartItem({super.key, required this.singleProduct});
 
   @override
   State<SingleCartItem> createState() => _SingleCartItemState();
 }
 
 class _SingleCartItemState extends State<SingleCartItem> {
-  int qty = 0;
+  int qty = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,8 @@ class _SingleCartItemState extends State<SingleCartItem> {
               height: 140,
               color: const Color.fromARGB(255, 204, 161, 231),
               child: Image.network(
-                  "https://pngimg.com/uploads/usb/usb_PNG8834.png"),
+                widget.singleProduct.image,
+              ),
             ),
           ),
           Expanded(
@@ -51,12 +54,15 @@ class _SingleCartItemState extends State<SingleCartItem> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Flash Drive",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: Text(
+                            widget.singleProduct.name,
+                            maxLines: 1,
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         Row(
@@ -108,9 +114,9 @@ class _SingleCartItemState extends State<SingleCartItem> {
                         ),
                       ],
                     ),
-                    const Text(
-                      "\$200",
-                      style: TextStyle(
+                    Text(
+                      "\$${widget.singleProduct.price.toString()}",
+                      style: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
                       ),

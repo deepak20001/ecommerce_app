@@ -1,8 +1,11 @@
+import 'package:ecommerce_app/constants/constants.dart';
 import 'package:ecommerce_app/screens/cart_screen/cart_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../constants/routes.dart';
 import '../../models/product_model/product_model.dart';
+import '../../provider/app_provider.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductModel singleProduct;
@@ -120,7 +123,12 @@ class _ProductDetailsState extends State<ProductDetails> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AppProvider appProvider =
+                        Provider.of<AppProvider>(context, listen: false);
+                    appProvider.addCartProduct(widget.singleProduct);
+                    showMessage("Added to Cart");
+                  },
                   child: const Text("ADD TO CART"),
                 ),
                 const SizedBox(

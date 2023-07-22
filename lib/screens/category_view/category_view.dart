@@ -1,6 +1,4 @@
-import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/material.dart';
-
 import '../../constants/routes.dart';
 import '../../firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import '../../models/category_model/category_model.dart';
