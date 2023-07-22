@@ -26,16 +26,20 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
-      body: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: appProvider.getCartProductList.length,
-        padding: const EdgeInsets.all(12.0),
-        itemBuilder: (ctx, index) {
-          return SingleCartItem(
-            singleProduct: appProvider.getCartProductList[index],
-          );
-        },
-      ),
+      body: appProvider.getCartProductList.isEmpty
+          ? const Center(
+              child: Text("Empty"),
+            )
+          : ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: appProvider.getCartProductList.length,
+              padding: const EdgeInsets.all(12.0),
+              itemBuilder: (ctx, index) {
+                return SingleCartItem(
+                  singleProduct: appProvider.getCartProductList[index],
+                );
+              },
+            ),
     );
   }
 }
