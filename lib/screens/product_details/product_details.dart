@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/constants/constants.dart';
 import 'package:ecommerce_app/screens/cart_screen/cart_screen.dart';
+import 'package:ecommerce_app/screens/favourite_screen/favourite_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,8 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -64,9 +67,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                         widget.singleProduct.isFavourite =
                             !widget.singleProduct.isFavourite;
                       });
+
+                      if (widget.singleProduct.isFavourite == true) {
+                        appProvider
+                            .addFavouriteProduct(widget.singleProduct);
+                      } else {
+                        appProvider
+                            .removeFavouriteProduct(widget.singleProduct);
+                      }
                     },
                     icon: Icon(
-                      widget.singleProduct.isFavourite
+                      appProvider.getFavouriteProductList
+                              .contains(widget.singleProduct)
                           ? Icons.favorite
                           : Icons.favorite_border,
                       color: const Color(0xFFAA27FB),
@@ -128,8 +140,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                 children: [
                   OutlinedButton(
                     onPressed: () {
-                      AppProvider appProvider =
-                          Provider.of<AppProvider>(context, listen: false);
                       ProductModel productModel =
                           widget.singleProduct.copyWith(qty: qty);
                       appProvider.addCartProduct(productModel);
@@ -144,7 +154,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                     height: 38,
                     width: 140,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Routes.instance.push(
+                            widget: const FavouriteScreen(), context: context);
+                      },
                       child: const Text("BUY"),
                     ),
                   ),
