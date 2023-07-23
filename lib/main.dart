@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/constants/theme.dart';
 import 'package:ecommerce_app/firebase_helper/firebase_options/firebase_options.dart';
 import 'package:ecommerce_app/provider/app_provider.dart';
+import 'package:ecommerce_app/screens/custom_bottom_bar/custom_bottom_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuthHepler.instance.getAuthChange,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const Home();
+              return const CustomBottomBar();
             }
             return const Welcome();
           },

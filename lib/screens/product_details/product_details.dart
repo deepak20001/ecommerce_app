@@ -69,8 +69,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       });
 
                       if (widget.singleProduct.isFavourite == true) {
-                        appProvider
-                            .addFavouriteProduct(widget.singleProduct);
+                        appProvider.addFavouriteProduct(widget.singleProduct);
                       } else {
                         appProvider
                             .removeFavouriteProduct(widget.singleProduct);
@@ -155,8 +154,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     width: 140,
                     child: ElevatedButton(
                       onPressed: () {
-                        Routes.instance.push(
-                            widget: const FavouriteScreen(), context: context);
+                        // Routes.instance.push(
+                        //     widget: const FavouriteScreen(), context: context);
                       },
                       child: const Text("BUY"),
                     ),
@@ -164,7 +163,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ],
               ),
               const SizedBox(
-                height: 24.0,
+                height: 50.0,
               ),
             ],
           ),
