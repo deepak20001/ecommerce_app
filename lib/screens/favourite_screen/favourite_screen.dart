@@ -1,9 +1,7 @@
 import 'package:ecommerce_app/screens/favourite_screen/widgets/single_favourite_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../provider/app_provider.dart';
-import '../cart_screen/widgets/single_cart_item.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({super.key});

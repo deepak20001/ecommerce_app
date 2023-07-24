@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/constants/constants.dart';
 import 'package:ecommerce_app/screens/cart_screen/cart_screen.dart';
-import 'package:ecommerce_app/screens/favourite_screen/favourite_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

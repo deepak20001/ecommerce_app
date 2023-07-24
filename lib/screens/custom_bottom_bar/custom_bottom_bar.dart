@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/constants/theme.dart';
+import 'package:ecommerce_app/screens/account_screen/account_screen.dart';
 import 'package:ecommerce_app/screens/cart_screen/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -23,7 +23,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         const Home(),
         const CartScreen(),
         const FavouriteScreen(),
-        const FavouriteScreen(),
+        const AccountScreen(),
       ];
 
   List<PersistentBottomNavBarItem> _navBarsItems() => [
@@ -51,7 +51,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.person),
           inactiveIcon: const Icon(Icons.person_outline),
-          title: "Profile",
+          title: "Account",
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.black,
         ),
