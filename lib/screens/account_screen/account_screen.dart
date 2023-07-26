@@ -1,9 +1,15 @@
+import 'package:ecommerce_app/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
+  @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +96,10 @@ class AccountScreen extends StatelessWidget {
                     title: const Text("Support"),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      FirebaseAuthHepler.instance.signOut();
+                      setState(() {});
+                    },
                     leading: Icon(
                       Icons.logout_outlined,
                       color: Theme.of(context).primaryColor,
