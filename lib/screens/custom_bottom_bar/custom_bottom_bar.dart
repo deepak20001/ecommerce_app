@@ -32,28 +32,28 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
           inactiveIcon: const Icon(Icons.home_outlined),
           title: "Home",
           activeColorPrimary: Colors.white,
-          inactiveColorPrimary: Colors.black,
+          inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.shopping_cart),
           inactiveIcon: const Icon(Icons.shopping_cart_outlined),
           title: "Cart",
           activeColorPrimary: Colors.white,
-          inactiveColorPrimary: Colors.black,
+          inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.favorite),
           inactiveIcon: const Icon(Icons.favorite_outline),
           title: "Favourite",
           activeColorPrimary: Colors.white,
-          inactiveColorPrimary: Colors.black,
+          inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.person),
           inactiveIcon: const Icon(Icons.person_outline),
           title: "Account",
           activeColorPrimary: Colors.white,
-          inactiveColorPrimary: Colors.black,
+          inactiveColorPrimary: Colors.white,
         ),
       ];
 

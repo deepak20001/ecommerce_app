@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'screens/auth_ui/welcome/welcome.dart';
-import 'screens/home/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

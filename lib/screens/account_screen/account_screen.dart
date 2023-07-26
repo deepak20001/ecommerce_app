@@ -59,27 +59,42 @@ class AccountScreen extends StatelessWidget {
                 children: [
                   ListTile(
                     onTap: () {},
-                    leading: const Icon(Icons.shopping_bag_outlined),
+                    leading: Icon(
+                      Icons.shopping_bag_outlined,
+                      color: Theme.of(context).primaryColor,
+                    ),
                     title: const Text("Your Orders"),
                   ),
                   ListTile(
                     onTap: () {},
-                    leading: const Icon(Icons.favorite_outline),
+                    leading: Icon(
+                      Icons.favorite_outline,
+                      color: Theme.of(context).primaryColor,
+                    ),
                     title: const Text("Favourite"),
                   ),
                   ListTile(
                     onTap: () {},
-                    leading: const Icon(Icons.info_outline),
+                    leading: Icon(
+                      Icons.info_outline,
+                      color: Theme.of(context).primaryColor,
+                    ),
                     title: const Text("About us"),
                   ),
                   ListTile(
                     onTap: () {},
-                    leading: const Icon(Icons.support_agent_outlined),
+                    leading: Icon(
+                      Icons.support_agent_outlined,
+                      color: Theme.of(context).primaryColor,
+                    ),
                     title: const Text("Support"),
                   ),
                   ListTile(
                     onTap: () {},
-                    leading: const Icon(Icons.logout_outlined),
+                    leading: Icon(
+                      Icons.logout_outlined,
+                      color: Theme.of(context).primaryColor,
+                    ),
                     title: const Text("Log out"),
                   ),
                   const SizedBox(

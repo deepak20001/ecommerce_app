@@ -114,7 +114,7 @@ class _SignUpState extends State<SignUp> {
                   bool isValidate = signUpValidation(email.text, password.text, name.text, phone.text);
                   if (isValidate == true) {
                     bool isLogined = await FirebaseAuthHepler.instance
-                        .signUp(email.text, password.text, context);
+                        .signUp(name.text, email.text, password.text, context);
                     if (isLogined == true) {
                       Routes.instance
                           .pushAndRemoveUntil(widget: Home(), context: context);
