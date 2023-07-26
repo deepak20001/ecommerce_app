@@ -1,6 +1,9 @@
 import 'package:ecommerce_app/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/app_provider.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -12,6 +15,8 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -26,36 +31,36 @@ class _AccountScreenState extends State<AccountScreen> {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.person_outline,
-                    size: 120.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                appProvider.getUserInformation.image == null
+                    ? const Icon(
+                        Icons.person_outline,
+                        size: 120.0,
+                      )
+                    : Image.network(appProvider.getUserInformation.image!),
+                Text(
+                  appProvider.getUserInformation.name,
+                  style: const TextStyle(
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const Text(
-                    "Deepak",
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                Text(
+                  appProvider.getUserInformation.email,
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                SizedBox(
+                  width: 130.0,
+                  child: PrimaryButton(
+                    onPressed: () {},
+                    title: "Edit Profile",
                   ),
-                  const Text(
-                    "deepak@gmail.com",
-                  ),
-                  const SizedBox(
-                    height: 12.0,
-                  ),
-                  SizedBox(
-                    width: 130.0,
-                    child: PrimaryButton(
-                      onPressed: () {},
-                      title: "Edit Profile",
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Expanded(

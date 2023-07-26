@@ -4,9 +4,8 @@ import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../constants/routes.dart';
-import '../../home/home.dart';
+import '../../custom_bottom_bar/custom_bottom_bar.dart';
 import '../sign_up/sign_up.dart';
 
 class Login extends StatefulWidget {
@@ -88,7 +87,7 @@ class _LoginState extends State<Login> {
                         .login(email.text, password.text, context);
                     if (isLogined == true) {
                       Routes.instance
-                          .pushAndRemoveUntil(widget: Home(), context: context);
+                          .pushAndRemoveUntil(widget: const CustomBottomBar(), context: context);
                     }
                   }
                 },

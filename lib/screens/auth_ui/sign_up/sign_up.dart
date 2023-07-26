@@ -1,6 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'package:ecommerce_app/screens/home/home.dart';
 import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/routes.dart';
 import '../../../firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import '../../custom_bottom_bar/custom_bottom_bar.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -118,7 +117,7 @@ class _SignUpState extends State<SignUp> {
                         .signUp(name.text, email.text, password.text, context);
                     if (isLogined == true) {
                       Routes.instance
-                          .pushAndRemoveUntil(widget: Home(), context: context);
+                          .pushAndRemoveUntil(widget: const CustomBottomBar(), context: context);
                     }
                   }
                 },

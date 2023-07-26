@@ -4,9 +4,11 @@ import 'package:ecommerce_app/screens/product_details/product_details.dart';
 import 'package:ecommerce_app/widgets/top_titles/top_titles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../constants/routes.dart';
 import '../../models/category_model/category_model.dart';
 import '../../models/product_model/product_model.dart';
+import '../../provider/app_provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -22,6 +24,9 @@ class _HomeState extends State<Home> {
   bool isLoading = false;
   @override
   void initState() {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false); 
+    appProvider.getUserInfoFirebase();
+
     getCategoryList();
     super.initState();
   }
@@ -33,6 +38,7 @@ class _HomeState extends State<Home> {
 
     categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
     productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
+
     productModelList.shuffle();
 
     setState(() {
