@@ -41,7 +41,11 @@ class _AccountScreenState extends State<AccountScreen> {
                         Icons.person_outline,
                         size: 120.0,
                       )
-                    : Image.network(appProvider.getUserInformation.image!),
+                    : CircleAvatar(
+                        backgroundImage:
+                            NetworkImage(appProvider.getUserInformation.image!),
+                        radius: 70.0,
+                      ),
                 Text(
                   appProvider.getUserInformation.name,
                   style: const TextStyle(
@@ -104,6 +108,14 @@ class _AccountScreenState extends State<AccountScreen> {
                       color: Theme.of(context).primaryColor,
                     ),
                     title: const Text("Support"),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading: Icon(
+                      Icons.change_circle_outlined,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    title: const Text("Change Password"),
                   ),
                   ListTile(
                     onTap: () {
