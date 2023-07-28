@@ -1,8 +1,10 @@
 import 'package:ecommerce_app/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import 'package:ecommerce_app/screens/edit_profile/edit_profile.dart';
 import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants/routes.dart';
 import '../../provider/app_provider.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -56,7 +58,10 @@ class _AccountScreenState extends State<AccountScreen> {
                 SizedBox(
                   width: 130.0,
                   child: PrimaryButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Routes.instance
+                          .push(widget: const EditProfile(), context: context);
+                    },
                     title: "Edit Profile",
                   ),
                 ),
