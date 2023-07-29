@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import 'package:ecommerce_app/screens/change_password/change_password.dart';
 import 'package:ecommerce_app/screens/edit_profile/edit_profile.dart';
 import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +111,10 @@ class _AccountScreenState extends State<AccountScreen> {
                     title: const Text("Support"),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Routes.instance.push(
+                          widget: const ChangePassword(), context: context);
+                    },
                     leading: Icon(
                       Icons.change_circle_outlined,
                       color: Theme.of(context).primaryColor,

@@ -10,6 +10,7 @@ class FirebaseAuthHepler {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Stream<User?> get getAuthChange => _auth.authStateChanges();
 
+  /* LOGIN */
   Future<bool> login(
       String email, String password, BuildContext context) async {
     try {
@@ -26,6 +27,7 @@ class FirebaseAuthHepler {
     }
   }
 
+  /* SIGNUP */
   Future<bool> signUp(
       String name, String email, String password, BuildContext context) async {
     try {
@@ -51,5 +53,31 @@ class FirebaseAuthHepler {
 
   void signOut() async {
     await _auth.signOut();
+  }
+
+  /* CHANDE PASSWORD */
+  Future<bool> changePassword(String password, BuildContext context) async {
+    try {
+      showLoaderDialog(context);
+      _auth.currentUser!.updatePassword(password);
+      // UserCredential? userCredential = await _auth
+      //     .createUserWithEmailAndPassword(email: email, password: password);
+
+      // UserModel userModel = UserModel(
+      //     image: null, name: name, id: userCredential.user!.uid, email: email);
+
+      // _firestore.collection("users").doc(userModel.id).set(userModel.toJson());
+
+      Navigator.of(context, rootNavigator: true).pop();
+      showMessage("Password Changed");
+      Navigator.of(context).pop();
+
+      return true;
+    } on FirebaseAuthException catch (error) {
+      Navigator.of(context).pop();
+      showMessage(error.code.toString());
+      // print(e.toString());
+      return false;
+    }
   }
 }

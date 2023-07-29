@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   bool isLoading = false;
   @override
   void initState() {
-    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false); 
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
     appProvider.getUserInfoFirebase();
 
     getCategoryList();

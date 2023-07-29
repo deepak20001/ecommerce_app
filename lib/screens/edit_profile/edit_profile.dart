@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:ecommerce_app/constants/constants.dart';
-import 'package:ecommerce_app/firebase_helper/firebase_storage_helper/firebase_storage_helper.dart';
 import 'package:ecommerce_app/provider/app_provider.dart';
 import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -88,7 +85,6 @@ class _EditProfileState extends State<EditProfile> {
               UserModel userModel = appProvider.getUserInformation
                   .copyWith(name: textEditingController.text);
               appProvider.updateUserInfoFirebase(context, userModel, image);
-              
             },
             title: "Update",
           ),
