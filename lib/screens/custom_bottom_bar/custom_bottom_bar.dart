@@ -1,9 +1,8 @@
 import 'package:ecommerce_app/screens/account_screen/account_screen.dart';
 import 'package:ecommerce_app/screens/cart_screen/cart_screen.dart';
+import 'package:ecommerce_app/screens/order_screen/order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
-import '../favourite_screen/favourite_screen.dart';
 import '../home/home.dart';
 
 class CustomBottomBar extends StatefulWidget {
@@ -22,7 +21,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   List<Widget> _buildScreens() => [
         const Home(),
         const CartScreen(),
-        const FavouriteScreen(),
+        const OrderScreen(),
         const AccountScreen(),
       ];
 
