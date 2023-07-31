@@ -42,9 +42,9 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
           inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.favorite),
-          inactiveIcon: const Icon(Icons.favorite_outline),
-          title: "Favourite",
+          icon: const Icon(Icons.local_shipping),
+          inactiveIcon: const Icon(Icons.local_shipping_outlined),
+          title: "Orders",
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.white,
         ),
