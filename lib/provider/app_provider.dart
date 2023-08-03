@@ -81,4 +81,14 @@ class AppProvider with ChangeNotifier {
     showMessage("Successfully updated profile");
     notifyListeners();
   }
+
+  // TOTAL PRICE
+  double totalPrice() {
+    double totalPrice = 0.0;
+    for (var element in _cartProductList) {
+      totalPrice += element.price * element.qty!;
+    }
+
+    return totalPrice;
+  }
 }

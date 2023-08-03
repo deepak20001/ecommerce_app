@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/constants/constants.dart';
 import 'package:ecommerce_app/screens/cart_screen/cart_screen.dart';
-import 'package:ecommerce_app/screens/checkout/checkout.dart';
+import 'package:ecommerce_app/screens/check_out/check_out.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

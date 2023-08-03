@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class Checkout extends StatefulWidget {
@@ -14,43 +13,7 @@ class _CheckoutState extends State<Checkout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SizedBox(
-        height: 180.0,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Total",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "\$150",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 24.0,
-              ),
-              PrimaryButton(
-                onPressed: () {},
-                title: "Checkout",
-              ),
-            ],
-          ),
-        ),
-      ),
-      appBar: AppBar(
+      appBar: AppBar(  
         backgroundColor: Colors.white,
         centerTitle: true,
         title: const Text(
