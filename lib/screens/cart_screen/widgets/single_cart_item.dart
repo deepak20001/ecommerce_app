@@ -87,6 +87,8 @@ class _SingleCartItemState extends State<SingleCartItem> {
                                       setState(() {
                                         qty--;
                                       });
+                                      appProvider.updateQty(
+                                          widget.singleProduct, qty);
                                     }
                                   },
                                   child: const CircleAvatar(
@@ -107,6 +109,8 @@ class _SingleCartItemState extends State<SingleCartItem> {
                                     setState(() {
                                       qty++;
                                     });
+                                    appProvider.updateQty(
+                                        widget.singleProduct, qty);
                                   },
                                   child: const CircleAvatar(
                                     maxRadius: 13.0,
@@ -122,11 +126,11 @@ class _SingleCartItemState extends State<SingleCartItem> {
                                     .contains(widget.singleProduct)) {
                                   appProvider.addFavouriteProduct(
                                       widget.singleProduct);
-                                      showMessage("Added to whishlist");
+                                  showMessage("Added to whishlist");
                                 } else {
                                   appProvider.removeFavouriteProduct(
                                       widget.singleProduct);
-                                      showMessage("Removed from whishlist");
+                                  showMessage("Removed from whishlist");
                                 }
                               },
                               child: Text(
