@@ -13,6 +13,7 @@ import '../models/user_model/user_model.dart';
 class AppProvider with ChangeNotifier {
   // CART WORK //
   final List<ProductModel> _cartProductList = [];
+  final List<ProductModel> _buyProductList = [];
 
   UserModel? _userModel;
 
@@ -98,4 +99,13 @@ class AppProvider with ChangeNotifier {
     _cartProductList[index].qty = qty;
     notifyListeners();
   }
+
+  // BUY PRODUCT //
+  void addBuyProduct(ProductModel model) {
+    _buyProductList.add(model);
+    notifyListeners();
+  }
+
+  List<ProductModel> get getBuyProductList => _buyProductList;
+
 }

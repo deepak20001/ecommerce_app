@@ -50,8 +50,8 @@ class _CartScreenState extends State<CartScreen> {
               ),
               PrimaryButton(
                 onPressed: () {
-                  Routes.instance
-                      .push(widget: const Checkout(), context: context);
+                  // Routes.instance
+                  //     .push(widget: const Checkout(), context: context);
                 },
                 title: "Checkout",
               ),

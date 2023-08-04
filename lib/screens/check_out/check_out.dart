@@ -1,7 +1,15 @@
+import 'package:ecommerce_app/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
+import 'package:ecommerce_app/screens/custom_bottom_bar/custom_bottom_bar.dart';
+import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../constants/routes.dart';
+import '../../models/product_model/product_model.dart';
+import '../../provider/app_provider.dart';
 
 class Checkout extends StatefulWidget {
-  const Checkout({super.key});
+  final ProductModel singleProduct;
+  const Checkout({super.key, required this.singleProduct});
 
   @override
   State<Checkout> createState() => _CheckoutState();
@@ -12,8 +20,10 @@ class _CheckoutState extends State<Checkout> {
 
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+
     return Scaffold(
-      appBar: AppBar(  
+      appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
         title: const Text(
@@ -102,6 +112,34 @@ class _CheckoutState extends State<Checkout> {
                   ),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 24.0,
+            ),
+            PrimaryButton(
+              onPressed: () async {
+                appProvider.getBuyProductList.clear();
+                appProvider.addBuyProduct(widget.singleProduct);
+
+                bool value = await FirebaseFirestoreHelper.instance
+                    .uploadOrderedProductFirebase(
+                  appProvider.getBuyProductList,
+                  context,
+                  groupValue == 1 ? "Cash on Delivery" : "Paid",
+                );
+                if (value == true) {
+                  Future.delayed(
+                    const Duration(
+                      seconds: 2,
+                    ),
+                    () {
+                      Routes.instance.push(
+                          widget: const CustomBottomBar(), context: context);
+                    },
+                  );
+                }
+              },
+              title: "Continue",
             ),
           ],
         ),
