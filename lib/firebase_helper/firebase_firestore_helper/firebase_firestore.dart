@@ -91,9 +91,7 @@ class FirebaseFirestoreHelper {
           .collection("orders")
           .doc();
 
-      DocumentReference admin = _firebaseFirestore
-          .collection("orders")
-          .doc();
+      DocumentReference admin = _firebaseFirestore.collection("orders").doc();
 
       admin.set({
         "products": list.map((e) => e.toJson()),
@@ -122,12 +120,11 @@ class FirebaseFirestoreHelper {
   }
 
   //  GET USER ORDERS
-  Future<List<OrderModel>> getUserOrder(BuildContext context) async {
+  Future<List<OrderModel>> getUserOrder() async {
     try {
-      showLoaderDialog(context);
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
           await _firebaseFirestore
-              .collection("userOrders")
+              .collection("usersOrders")
               .doc(FirebaseAuth.instance.currentUser!.uid)
               .collection("orders")
               .get();
@@ -136,11 +133,9 @@ class FirebaseFirestoreHelper {
           .map((element) => OrderModel.fromJson(element.data()))
           .toList();
 
-      Navigator.of(context, rootNavigator: true).pop();
-
       return orderList;
     } catch (e) {
-      Navigator.of(context, rootNavigator: true).pop();
+      showMessage(e.toString());
       return [];
     }
   }

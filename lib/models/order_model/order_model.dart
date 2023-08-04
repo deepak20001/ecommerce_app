@@ -29,5 +29,4 @@ class OrderModel {
 
   // toJson currently not needed
   //  it's expected to be a method within the OrderModel class that converts an OrderModel instance to a JSON map. It will be used when sending order data to an API or when storing the data in a database.
-      
 }
