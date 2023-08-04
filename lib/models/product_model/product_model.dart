@@ -11,7 +11,6 @@ class ProductModel {
   String name;
   double price;
   String description;
-  String status;
   bool isFavourite = false;
 
   int? qty;
@@ -22,7 +21,6 @@ class ProductModel {
     required this.name,
     required this.price,
     required this.description,
-    required this.status,
     required isFavourite,
     this.qty,
   });
@@ -35,7 +33,6 @@ class ProductModel {
         price: double.parse(json["price"].toString()),
         description: json["description"] ??
             "This is an awesome product and must to buy.",
-        status: json["status"] ?? "pending",
         isFavourite: false,
         qty: json["qty"],
       );
@@ -46,7 +43,6 @@ class ProductModel {
         "name": name,
         "price": price,
         "description": description,
-        "status": status,
         "isFavourite": isFavourite,
         "qty": qty,
       };
@@ -60,7 +56,6 @@ class ProductModel {
         name: name,
         price: price,
         description: description,
-        status: status,
         isFavourite: isFavourite,
         qty: qty??this.qty,
       );
