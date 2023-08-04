@@ -1,9 +1,6 @@
 import 'package:ecommerce_app/screens/cart_screen/widgets/single_cart_item.dart';
-import 'package:ecommerce_app/screens/check_out/check_out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../constants/routes.dart';
 import '../../provider/app_provider.dart';
 import '../../widgets/primary_button/primary_button.dart';
 

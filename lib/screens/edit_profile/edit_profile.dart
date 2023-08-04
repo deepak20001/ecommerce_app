@@ -57,7 +57,7 @@ class _EditProfileState extends State<EditProfile> {
                     takePicture();
                   },
                   child: const CircleAvatar(
-                      radius: 70.0, child: Icon(Icons.camera_alt)),
+                      radius: 55.0, child: Icon(Icons.camera_alt)),
                 )
               : CupertinoButton(
                   onPressed: () {
@@ -65,7 +65,7 @@ class _EditProfileState extends State<EditProfile> {
                   },
                   child: CircleAvatar(
                     backgroundImage: FileImage(image!),
-                    radius: 70.0,
+                    radius: 55.0,
                   ),
                 ),
           const SizedBox(
