@@ -4,18 +4,16 @@ import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/routes.dart';
-import '../../models/product_model/product_model.dart';
 import '../../provider/app_provider.dart';
 
-class Checkout extends StatefulWidget {
-  final ProductModel singleProduct;
-  const Checkout({super.key, required this.singleProduct});
+class CartItemCheckout extends StatefulWidget {
+  const CartItemCheckout({super.key});
 
   @override
-  State<Checkout> createState() => _CheckoutState();
+  State<CartItemCheckout> createState() => _CartItemCheckoutState();
 }
 
-class _CheckoutState extends State<Checkout> {
+class _CartItemCheckoutState extends State<CartItemCheckout> {
   int groupValue = 1;
 
   @override
@@ -118,8 +116,7 @@ class _CheckoutState extends State<Checkout> {
             ),
             PrimaryButton(
               onPressed: () async {
-                appProvider.clearBuyProduct();
-                appProvider.addBuyProduct(widget.singleProduct);
+                
 
                 bool value = await FirebaseFirestoreHelper.instance
                     .uploadOrderedProductFirebase(
@@ -127,6 +124,9 @@ class _CheckoutState extends State<Checkout> {
                   context,
                   groupValue == 1 ? "Cash on Delivery" : "Paid",
                 );
+                
+                appProvider.clearBuyProduct();
+                
                 if (value == true) {
                   Future.delayed(
                     const Duration(
