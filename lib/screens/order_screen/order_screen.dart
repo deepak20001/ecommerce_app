@@ -42,19 +42,22 @@ class OrderScreen extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12.0),
                     child: ExpansionTile(
-                      childrenPadding: EdgeInsets.zero,
                       tilePadding: EdgeInsets.zero,
                       collapsedShape: const RoundedRectangleBorder(
                         side: BorderSide(
                           color: Color(0xFFAA27FB),
+                          width: 1.5,
                         ),
                       ),
                       shape: const RoundedRectangleBorder(
                         side: BorderSide(
-                          color: Color((0xFFAA27FB)),
+                          color: Color(0xFFAA27FB),
+                          width: 1.5,
                         ),
                       ),
                       title: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
                             height: 155.0,
@@ -131,7 +134,100 @@ class OrderScreen extends StatelessWidget {
                       ),
                       children: orderModel.products.length > 1
                           ? [
-                              const Text("Hello"),
+                              Divider(
+                                color: Theme.of(context).primaryColor,
+                                thickness: 1.0,
+                              ),
+                              const Text(
+                                "Details",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              Divider(
+                                color: Theme.of(context).primaryColor,
+                                thickness: 1.0,
+                              ),
+                              ...orderModel.products.map((singleProduct) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 12.0, top: 6.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.baseline,
+                                        textBaseline: TextBaseline.alphabetic,
+                                        children: [
+                                          Container(
+                                            height: 80.0,
+                                            width: 80.0,
+                                            color: const Color.fromARGB(
+                                                255, 204, 161, 231),
+                                            child: Image.network(
+                                              singleProduct.image,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 12.0,
+                                              left: 12.0,
+                                              right: 12.0,
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+                                                  child: Text(
+                                                    singleProduct.name,
+                                                    maxLines: 1,
+                                                    style: const TextStyle(
+                                                      fontSize: 12.0,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 12.0,
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                      "Quantity: ${singleProduct.qty}",
+                                                      style: const TextStyle(
+                                                        fontSize: 12.0,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 5.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Text(
+                                                  "Price: \$${singleProduct.price.toString()}",
+                                                  style: const TextStyle(
+                                                    fontSize: 12.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Divider(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                    ],
+                                  ),
+                                );
+                              }).toList()
                             ]
                           : [],
                     ),
