@@ -98,6 +98,7 @@ class FirebaseFirestoreHelper {
         "status": "Pending",
         "totalPrice": totalPrice,
         "payment": payment,
+        "orderId": admin.id,
       });
 
       documentReference.set({
@@ -105,6 +106,7 @@ class FirebaseFirestoreHelper {
         "status": "Pending",
         "totalPrice": totalPrice,
         "payment": payment,
+        "orderId": documentReference.id,
       });
 
       Navigator.of(context, rootNavigator: true).pop();
