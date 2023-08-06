@@ -10,6 +10,7 @@ import 'screens/auth_ui/welcome/welcome.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Stripe.publishableKey = "stripe publish key here";
   await Firebase.initializeApp(
     // if want to run for ios also then add 2 platform in firebase_options file with the required id, key, etc
     options: DefaultFirebaseConfig.platformOptions,
