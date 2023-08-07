@@ -2,7 +2,7 @@
 
 import 'package:ecommerce_app/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:ecommerce_app/screens/custom_bottom_bar/custom_bottom_bar.dart';
-import 'package:ecommerce_app/stripe_helper/stripe_helper.dart';
+// import 'package:ecommerce_app/stripe_helper/stripe_helper.dart';
 import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
