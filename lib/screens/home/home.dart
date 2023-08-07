@@ -41,9 +41,24 @@ class _HomeState extends State<Home> {
 
     productModelList.shuffle();
 
-    setState(() {
-      isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  TextEditingController search = TextEditingController();
+  List<ProductModel> searchList = [];
+  void searchProducts(String value) {
+    searchList = productModelList
+        .where(
+          (element) => element.name.toLowerCase().contains(
+                value.toLowerCase(),
+              ),
+        )
+        .toList();
+    setState(() {});
   }
 
   @override
@@ -70,8 +85,23 @@ class _HomeState extends State<Home> {
                       children: [
                         const TopTitles(title: "E Commerce", subtitle: ""),
                         TextFormField(
-                          decoration:
-                              const InputDecoration(hintText: "Search...."),
+                          controller: search,
+                          onChanged: (String value) {
+                            searchProducts(value);
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Search....",
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                search.clear();
+                                searchList.clear();
+                                setState(() {});
+                              },
+                              icon: const Icon(
+                                Icons.clear_rounded,
+                              ),
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 24.0,
@@ -127,97 +157,180 @@ class _HomeState extends State<Home> {
                   const SizedBox(
                     height: 12.0,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(
-                      top: 12.0,
-                      left: 12.0,
-                    ),
-                    child: Text(
-                      "Best Products",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  !isSearched()
+                      ? const Padding(
+                          padding: EdgeInsets.only(
+                            top: 12.0,
+                            left: 12.0,
+                          ),
+                          child: Text(
+                            "Best Products",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      : SizedBox.fromSize(),
                   const SizedBox(
                     height: 12.0,
                   ),
-                  productModelList.isEmpty
+                  search.text.isNotEmpty && searchList.isEmpty
                       ? const Center(
-                          child: Text("Best Product is empty"),
+                          child: Text("No product found"),
                         )
-                      : Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: GridView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            padding: const EdgeInsets.only(bottom: 50.0),
-                            shrinkWrap: true,
-                            primary: false,
-                            itemCount: productModelList.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              mainAxisSpacing: 20,
-                              crossAxisSpacing: 20,
-                              childAspectRatio: 0.72,
-                              crossAxisCount: 2,
-                            ),
-                            itemBuilder: (ctx, index) {
-                              ProductModel singleProduct =
-                                  productModelList[index];
-                              return Container(
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 228, 209, 240),
-                                  borderRadius: BorderRadius.circular(8.0),
+                      : searchList.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: GridView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                padding: const EdgeInsets.only(bottom: 50.0),
+                                shrinkWrap: true,
+                                primary: false,
+                                itemCount: searchList.length,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  mainAxisSpacing: 20,
+                                  crossAxisSpacing: 20,
+                                  childAspectRatio: 0.72,
+                                  crossAxisCount: 2,
                                 ),
-                                child: Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 12.0,
+                                itemBuilder: (ctx, index) {
+                                  ProductModel singleProduct =
+                                      searchList[index];
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          255, 228, 209, 240),
+                                      borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                    Image.network(
-                                      singleProduct.image,
-                                      height: 100.0,
-                                      width: 100.0,
-                                    ),
-                                    const SizedBox(
-                                      height: 12.0,
-                                    ),
-                                    Text(
-                                      singleProduct.name,
-                                      maxLines: 1,
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text("Price: \$${singleProduct.price}"),
-                                    const SizedBox(
-                                      height: 18.0,
-                                    ),
-                                    SizedBox(
-                                      height: 45.0,
-                                      width: 140.0,
-                                      child: OutlinedButton(
-                                        onPressed: () {
-                                          Routes.instance.push(
-                                              widget: ProductDetails(
-                                                  singleProduct: singleProduct),
-                                              context: context);
-                                        },
-                                        child: const Text(
-                                          "Buy",
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 12.0,
                                         ),
-                                      ),
+                                        Image.network(
+                                          singleProduct.image,
+                                          height: 100.0,
+                                          width: 100.0,
+                                        ),
+                                        const SizedBox(
+                                          height: 12.0,
+                                        ),
+                                        Text(
+                                          singleProduct.name,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text("Price: \$${singleProduct.price}"),
+                                        const SizedBox(
+                                          height: 18.0,
+                                        ),
+                                        SizedBox(
+                                          height: 45.0,
+                                          width: 140.0,
+                                          child: OutlinedButton(
+                                            onPressed: () {
+                                              Routes.instance.push(
+                                                  widget: ProductDetails(
+                                                      singleProduct:
+                                                          singleProduct),
+                                                  context: context);
+                                            },
+                                            child: const Text(
+                                              "Buy",
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                  );
+                                },
+                              ),
+                            )
+                          : productModelList.isEmpty
+                              ? const Center(
+                                  child: Text("Best Product is empty"),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: GridView.builder(
+                                    physics: const BouncingScrollPhysics(),
+                                    padding:
+                                        const EdgeInsets.only(bottom: 50.0),
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    itemCount: productModelList.length,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      mainAxisSpacing: 20,
+                                      crossAxisSpacing: 20,
+                                      childAspectRatio: 0.72,
+                                      crossAxisCount: 2,
+                                    ),
+                                    itemBuilder: (ctx, index) {
+                                      ProductModel singleProduct =
+                                          productModelList[index];
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              255, 228, 209, 240),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            const SizedBox(
+                                              height: 12.0,
+                                            ),
+                                            Image.network(
+                                              singleProduct.image,
+                                              height: 100.0,
+                                              width: 100.0,
+                                            ),
+                                            const SizedBox(
+                                              height: 12.0,
+                                            ),
+                                            Text(
+                                              singleProduct.name,
+                                              maxLines: 1,
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                                "Price: \$${singleProduct.price}"),
+                                            const SizedBox(
+                                              height: 18.0,
+                                            ),
+                                            SizedBox(
+                                              height: 45.0,
+                                              width: 140.0,
+                                              child: OutlinedButton(
+                                                onPressed: () {
+                                                  Routes.instance.push(
+                                                      widget: ProductDetails(
+                                                          singleProduct:
+                                                              singleProduct),
+                                                      context: context);
+                                                },
+                                                child: const Text(
+                                                  "Buy",
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
-                              );
-                            },
-                          ),
-                        ),
                   const SizedBox(
                     height: 12.0,
                   ),
@@ -225,5 +338,17 @@ class _HomeState extends State<Home> {
               ),
             ),
     );
+  }
+
+  bool isSearched() {
+    if (search.text.isNotEmpty && searchList.isEmpty) {
+      return true;
+    } else if (search.text.isEmpty && searchList.isNotEmpty) {
+      return false;
+    } else if (searchList.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
