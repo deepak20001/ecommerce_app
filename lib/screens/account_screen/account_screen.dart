@@ -1,7 +1,9 @@
 import 'package:ecommerce_app/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import 'package:ecommerce_app/screens/about_us/about_us.dart';
 import 'package:ecommerce_app/screens/change_password/change_password.dart';
 import 'package:ecommerce_app/screens/edit_profile/edit_profile.dart';
 import 'package:ecommerce_app/screens/favourite_screen/favourite_screen.dart';
+import 'package:ecommerce_app/screens/order_screen/order_screen.dart';
 import 'package:ecommerce_app/widgets/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -80,7 +82,10 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Column(
                 children: [
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Routes.instance
+                          .push(widget: const OrderScreen(), context: context);
+                    },
                     leading: Icon(
                       Icons.shopping_bag_outlined,
                       color: Theme.of(context).primaryColor,
@@ -99,20 +104,15 @@ class _AccountScreenState extends State<AccountScreen> {
                     title: const Text("Favourite"),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Routes.instance
+                          .push(widget: const AboutUs(), context: context);
+                    },
                     leading: Icon(
                       Icons.info_outline,
                       color: Theme.of(context).primaryColor,
                     ),
                     title: const Text("About us"),
-                  ),
-                  ListTile(
-                    onTap: () {},
-                    leading: Icon(
-                      Icons.support_agent_outlined,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    title: const Text("Support"),
                   ),
                   ListTile(
                     onTap: () {

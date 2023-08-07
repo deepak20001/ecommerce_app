@@ -121,22 +121,59 @@ class _CheckoutState extends State<Checkout> {
                 appProvider.clearBuyProduct();
                 appProvider.addBuyProduct(widget.singleProduct);
 
-                bool value = await FirebaseFirestoreHelper.instance
-                    .uploadOrderedProductFirebase(
-                  appProvider.getBuyProductList,
-                  context,
-                  groupValue == 1 ? "Cash on Delivery" : "Paid",
-                );
-                if (value == true) {
-                  Future.delayed(
-                    const Duration(
-                      seconds: 2,
-                    ),
-                    () {
-                      Routes.instance.push(
-                          widget: const CustomBottomBar(), context: context);
-                    },
+                if (groupValue == 1) {
+                  bool value = await FirebaseFirestoreHelper.instance
+                      .uploadOrderedProductFirebase(
+                    appProvider.getBuyProductList,
+                    context,
+                    "Cash on Delivery",
                   );
+
+                  if (value == true) {
+                    Future.delayed(
+                      const Duration(
+                        seconds: 2,
+                      ),
+                      () {
+                        Routes.instance.push(
+                            widget: const CustomBottomBar(), context: context);
+                      },
+                    );
+                  }
+                } else {
+                  bool isSuccessfullyPayment = true;
+                  // int value = double.parse(
+                  //         appProvider.totalPriceBuyProductList().toString())
+                  //     .round()
+                  //     .toInt();
+                  // String totalPrice = (value * 100).toString();
+
+                  // bool isSuccessfullyPayment = await StripeHelper.instance
+                  //     .makePayment(totalPrice.toString());
+
+                  if (isSuccessfullyPayment == true) {
+                    bool value = await FirebaseFirestoreHelper.instance
+                        .uploadOrderedProductFirebase(
+                      appProvider.getBuyProductList,
+                      context,
+                      "Paid",
+                    );
+
+                    appProvider.clearBuyProduct();
+
+                    if (value == true) {
+                      Future.delayed(
+                        const Duration(
+                          seconds: 2,
+                        ),
+                        () {
+                          Routes.instance.push(
+                              widget: const CustomBottomBar(),
+                              context: context);
+                        },
+                      );
+                    }
+                  }
                 }
               },
               title: "Continue",
