@@ -37,6 +37,7 @@ class _LoginState extends State<Login> {
                 height: 46.0,
               ),
               TextFormField(
+                keyboardType: TextInputType.emailAddress,
                 controller: email,
                 decoration: const InputDecoration(
                   hintText: "E-mail",
@@ -86,8 +87,8 @@ class _LoginState extends State<Login> {
                     bool isLogined = await FirebaseAuthHepler.instance
                         .login(email.text, password.text, context);
                     if (isLogined == true) {
-                      Routes.instance
-                          .pushAndRemoveUntil(widget: const CustomBottomBar(), context: context);
+                      Routes.instance.pushAndRemoveUntil(
+                          widget: const CustomBottomBar(), context: context);
                     }
                   }
                 },
