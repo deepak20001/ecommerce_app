@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/routes.dart';
 import '../../provider/app_provider.dart';
+import '../../stripe_helper/stripe_helper.dart';
 
 class CartItemCheckout extends StatefulWidget {
   const CartItemCheckout({super.key});
@@ -139,39 +140,15 @@ class _CartItemCheckoutState extends State<CartItemCheckout> {
                     );
                   }
                 } else {
-                  bool isSuccessfullyPayment = true;
-                  // int value = double.parse(
-                  //         appProvider.totalPriceBuyProductList().toString())
-                  //     .round()
-                  //     .toInt();
-                  // String totalPrice = (value * 100).toString();
+                  // bool isSuccessfullyPayment = true;
+                  int value = double.parse(
+                          appProvider.totalPriceBuyProductList().toString())
+                      .round()
+                      .toInt();
+                  String totalPrice = (value * 100).toString();
 
-                  // bool isSuccessfullyPayment = await StripeHelper.instance
-                  //     .makePayment(totalPrice.toString());
-
-                  if (isSuccessfullyPayment == true) {
-                    bool value = await FirebaseFirestoreHelper.instance
-                        .uploadOrderedProductFirebase(
-                      appProvider.getBuyProductList,
-                      context,
-                      "Paid",
-                    );
-
-                    appProvider.clearBuyProduct();
-
-                    if (value == true) {
-                      Future.delayed(
-                        const Duration(
-                          seconds: 2,
-                        ),
-                        () {
-                          Routes.instance.push(
-                              widget: const CustomBottomBar(),
-                              context: context);
-                        },
-                      );
-                    }
-                  }
+                  await StripeHelper.instance
+                      .makePayment(totalPrice.toString(), context);
                 }
               },
               title: "Continue",

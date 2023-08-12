@@ -4,13 +4,14 @@ import 'package:ecommerce_app/provider/app_provider.dart';
 import 'package:ecommerce_app/screens/custom_bottom_bar/custom_bottom_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'screens/auth_ui/welcome/welcome.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Stripe.publishableKey = "stripe publish key here";
+  Stripe.publishableKey = "Add publishable key here";
   await Firebase.initializeApp(
     // if want to run for ios also then add 2 platform in firebase_options file with the required id, key, etc
     options: DefaultFirebaseConfig.platformOptions,
