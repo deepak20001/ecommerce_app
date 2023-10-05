@@ -19,7 +19,8 @@ Discover the future of shopping through our cutting-edge e-commerce app. We brin
 ## Features
 - <b>Effortless User Authentication:</b> Enjoy secure access to the app through seamless email sign-in options.
 - <b>Password Recovery:</b> Regain access to your account with ease by resetting your password via email.
-- <b>Stripe payment:</b> Explore the efficient stripe payment gateway
+- <b>Stripe payment:</b> Explore the efficient stripe payment gateway.
+- <b>State Management:</b> Used provider to provide efficient user experience.
 
 
 ## Contributing
