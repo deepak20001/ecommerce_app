@@ -14,6 +14,8 @@ Discover the future of shopping through our cutting-edge e-commerce app. We brin
   &nbsp;&nbsp;&nbsp;&nbsp;  
   <img src="https://github.com/deepak20001/ecommerce_app/assets/88405430/ebb747bb-d185-4312-8fa6-f5034888d274"  width="200">
   &nbsp;&nbsp;&nbsp;&nbsp; 
+  <img src="https://github.com/deepak20001/ecommerce_app/assets/88405430/53d91115-e418-4c28-93ad-4bc4285a527a"  width="200">
+  &nbsp;&nbsp;&nbsp;&nbsp; 
 </p>
 
 ## Features
